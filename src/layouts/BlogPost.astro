@@ -2,7 +2,6 @@
 import type { CollectionEntry } from 'astro:content';
 import BaseHead from '../components/BaseHead.astro';
 import FormattedDate from '../components/FormattedDate.astro';
-import Header from '../components/Header.astro';
 
 type Props = CollectionEntry<'blog'>['data'];
 
@@ -13,8 +12,28 @@ const { title, description, pubDate, updatedDate } = Astro.props;
 	<head>
 		<BaseHead title={title} description={description} />
 		<style>
-			body {
-				padding-top: 5rem;
+			@keyframes fadeIn {
+				from { opacity: 0; transform: translateY(10px); }
+				to { opacity: 1; transform: translateY(0); }
+			}
+
+			main {
+				animation: fadeIn 0.6s ease-out;
+			}
+
+			.back-link {
+				display: inline-block;
+				font-size: 0.875rem;
+				color: var(--gray);
+				text-decoration: none;
+				margin-bottom: 3rem;
+				transition: color 0.2s ease, transform 0.2s ease;
+			}
+
+			.back-link:hover {
+				color: #ffff00;
+				opacity: 1;
+				transform: translateX(-4px);
 			}
 
 			.article-header {
@@ -47,8 +66,8 @@ const { title, description, pubDate, updatedDate } = Astro.props;
 	</head>
 
 	<body>
-		<Header />
 		<main>
+			<a href="/" class="back-link">← Back</a>
 			<article>
 				<header class="article-header">
 					<div class="date">

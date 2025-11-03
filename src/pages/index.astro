@@ -2,6 +2,7 @@
 import { getCollection } from 'astro:content';
 import BaseHead from '../components/BaseHead.astro';
 import FormattedDate from '../components/FormattedDate.astro';
+import AccentDice from '../components/AccentDice.astro';
 import { SITE_TITLE } from '../consts';
 
 const posts = (await getCollection('blog')).sort(
@@ -44,7 +45,7 @@ const posts = (await getCollection('blog')).sort(
 				content: '●';
 				color: var(--accent);
 				margin-right: 0.5rem;
-				font-size: 0.5em;
+				font-size: 0.8em;
 				vertical-align: middle;
 			}
 
@@ -114,6 +115,7 @@ const posts = (await getCollection('blog')).sort(
 			.post-date::before {
 				content: '→ ';
 				color: var(--accent);
+				font-size: 1.2em;
 			}
 
 			.post-title {
@@ -151,6 +153,7 @@ const posts = (await getCollection('blog')).sort(
 		</style>
 	</head>
 	<body>
+		<AccentDice />
 		<main>
 			<header class="header">
 				<div class="name">Darien Lombardi</div>

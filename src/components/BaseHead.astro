@@ -35,6 +35,16 @@ const { title, description, image = FallbackImage } = Astro.props;
 />
 <meta name="generator" content={Astro.generator} />
 
+<!-- Load saved accent color from localStorage -->
+<script is:inline>
+	(function() {
+		const savedColor = localStorage.getItem('accent-color');
+		if (savedColor && savedColor.length === 6) {
+			document.documentElement.style.setProperty('--accent', '#' + savedColor);
+		}
+	})();
+</script>
+
 <!-- Canonical URL -->
 <link rel="canonical" href={canonicalURL} />
 

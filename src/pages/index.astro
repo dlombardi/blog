@@ -19,37 +19,8 @@ const posts = (await getCollection('blog')).sort(
 				to { opacity: 1; }
 			}
 
-			@keyframes gridPulse {
-				0%, 100% { opacity: 0.05; }
-				50% { opacity: 0.15; }
-			}
-
 			main {
 				animation: fadeIn 0.8s ease-out;
-			}
-
-			/* Technical corner markers */
-			main::before,
-			main::after {
-				content: '';
-				position: absolute;
-				width: 30px;
-				height: 30px;
-				border: 2px solid var(--accent);
-			}
-
-			main::before {
-				top: 0;
-				left: 0;
-				border-right: none;
-				border-bottom: none;
-			}
-
-			main::after {
-				bottom: 0;
-				right: 0;
-				border-left: none;
-				border-top: none;
 			}
 
 			.header {
@@ -110,29 +81,6 @@ const posts = (await getCollection('blog')).sort(
 				padding-bottom: 3rem;
 				border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 				position: relative;
-				padding-left: 2.5rem;
-			}
-
-			.post-item::before {
-				content: '';
-				position: absolute;
-				left: 0;
-				top: 0;
-				bottom: 0;
-				width: 2px;
-				background: linear-gradient(to bottom, var(--accent), transparent);
-			}
-
-			.post-item::after {
-				content: attr(data-index);
-				position: absolute;
-				left: -0.5rem;
-				top: 0;
-				font-size: 0.75rem;
-				color: var(--gray);
-				font-family: var(--font-mono);
-				background: var(--white);
-				padding: 0 0.25rem;
 			}
 
 			.post-item:last-child {
@@ -193,7 +141,6 @@ const posts = (await getCollection('blog')).sort(
 				.post-item {
 					margin-bottom: 2rem;
 					padding-bottom: 2rem;
-					padding-left: 1.5rem;
 				}
 
 				.socials {
@@ -215,8 +162,8 @@ const posts = (await getCollection('blog')).sort(
 			</header>
 			<ul class="posts-list">
 				{
-					posts.map((post, index) => (
-						<li class="post-item" data-index={`${String(index + 1).padStart(2, '0')}`}>
+					posts.map((post) => (
+						<li class="post-item">
 							<a href={`/blog/${post.id}/`} class="post-link">
 								<div class="post-date">
 									<FormattedDate date={post.data.pubDate} />

@@ -18,5 +18,8 @@
   },
   "optionalDependencies": {
     "@rollup/rollup-linux-x64-gnu": "^4.52.5"
+  },
+  "devDependencies": {
+    "@esbuild/linux-x64": "^0.25.12"
   }
 }

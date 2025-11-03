@@ -11,6 +11,9 @@
         "sharp": "^0.34.3",
         "three": "^0.181.0",
       },
+      "devDependencies": {
+        "@esbuild/linux-x64": "^0.25.12",
+      },
       "optionalDependencies": {
         "@rollup/rollup-linux-x64-gnu": "^4.52.5",
       },

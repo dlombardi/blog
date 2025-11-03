@@ -1,16 +1,18 @@
 /*
-  Text-First Minimalism
-  Bold, technical, visionary
+  Engineering Schematic Aesthetic
+  Technical drawings, precision, blueprint-inspired
  */
 
 :root {
 	--black: #ffffff;
-	--white: #000000;
-	--gray: #a0a0a0;
+	--white: #0a0a0a;
+	--gray: #8a8a8a;
 	--gray-light: #1a1a1a;
+	--grid-color: rgba(255, 255, 255, 0.08);
+	--accent: #c3ff00;
 
-	/* System font stacks for performance and native feel */
-	--font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+	/* Technical font stacks */
+	--font-sans: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", sans-serif;
 	--font-mono: ui-monospace, "Cascadia Code", "Source Code Pro", Menlo, Consolas, "DejaVu Sans Mono", monospace;
 }
 
@@ -24,8 +26,8 @@ body {
 	padding: 0;
 	background: var(--white);
 	color: var(--black);
-	font-size: 18px;
-	line-height: 1.6;
+	font-size: 16px;
+	line-height: 1.7;
 	font-weight: 400;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
@@ -36,6 +38,7 @@ main {
 	max-width: calc(100% - 3rem);
 	margin: 0 auto;
 	padding: 6rem 1.5rem;
+	position: relative;
 }
 
 h1,
@@ -46,24 +49,28 @@ h5,
 h6 {
 	margin: 0;
 	color: var(--black);
-	line-height: 1.1;
-	font-weight: 900;
-	letter-spacing: -0.02em;
+	line-height: 1.2;
+	font-weight: 700;
+	letter-spacing: 0.02em;
+	font-family: var(--font-mono);
+	text-transform: uppercase;
 }
 
 h1 {
-	font-size: clamp(3rem, 8vw, 6rem);
+	font-size: clamp(2rem, 6vw, 4rem);
 	margin-bottom: 2rem;
+	border-bottom: 2px solid var(--accent);
+	padding-bottom: 0.5rem;
 }
 
 h2 {
-	font-size: clamp(2rem, 5vw, 3.5rem);
+	font-size: clamp(1.5rem, 4vw, 2.5rem);
 	margin-bottom: 1.5rem;
 	margin-top: 3rem;
 }
 
 h3 {
-	font-size: clamp(1.5rem, 4vw, 2.25rem);
+	font-size: clamp(1.25rem, 3vw, 1.75rem);
 	margin-bottom: 1rem;
 	margin-top: 2.5rem;
 }
@@ -136,23 +143,30 @@ hr {
 code {
 	font-family: var(--font-mono);
 	font-size: 0.9em;
-	background: var(--gray-light);
+	background: rgba(0, 255, 136, 0.05);
 	padding: 0.2em 0.4em;
+	border: 1px solid rgba(0, 255, 136, 0.2);
+	color: var(--accent);
 }
 
 pre {
 	font-family: var(--font-mono);
 	font-size: 0.875rem;
-	line-height: 1.5;
-	background: var(--gray-light);
+	line-height: 1.6;
+	background: rgba(0, 0, 0, 0.4);
 	padding: 1.5rem;
 	margin: 2rem 0;
 	overflow-x: auto;
+	border: 1px solid rgba(255, 255, 255, 0.1);
+	border-left: 3px solid var(--accent);
+	position: relative;
 }
 
 pre code {
 	background: none;
 	padding: 0;
+	border: none;
+	color: var(--black);
 }
 
 img {

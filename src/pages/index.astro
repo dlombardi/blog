@@ -31,17 +31,10 @@ const posts = (await getCollection('blog')).sort(
 				border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 			}
 
-			.name-container {
-				display: flex;
-				align-items: center;
-				justify-content: space-between;
-				margin-bottom: 0.5rem;
-				gap: 1rem;
-			}
-
 			.name {
 				font-size: 1.5rem;
 				font-weight: 700;
+				margin-bottom: 0.5rem;
 				letter-spacing: 0.05em;
 				font-family: var(--font-mono);
 				text-transform: uppercase;
@@ -162,10 +155,8 @@ const posts = (await getCollection('blog')).sort(
 	<body>
 		<main>
 			<header class="header">
-				<div class="name-container">
-					<div class="name">Darien Lombardi</div>
-					<AccentDice />
-				</div>
+				<AccentDice />
+				<div class="name">Darien Lombardi</div>
 				<div class="socials">
 					<a href="https://github.com/dlombardi" target="_blank" rel="noopener noreferrer">GitHub</a>
 					<a href="https://x.com/DarienLombardi" target="_blank" rel="noopener noreferrer">Twitter</a>

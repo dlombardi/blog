@@ -4,8 +4,8 @@
  */
 
 :root {
-	--black: #ffffff;
-	--white: #121212;
+	--black: #121212;
+	--white: #ffffff;
 	--gray: #8a8a8a;
 	--gray-light: #1f1f1f;
 	--grid-color: rgba(255, 255, 255, 0.08);
@@ -24,8 +24,8 @@ body {
 	font-family: var(--font-sans);
 	margin: 0;
 	padding: 0;
-	background: var(--white);
-	color: var(--black);
+	background: var(--black);
+	color: var(--white);
 	font-size: 16px;
 	line-height: 1.7;
 	font-weight: 400;
@@ -48,7 +48,7 @@ h4,
 h5,
 h6 {
 	margin: 0;
-	color: var(--black);
+	color: var(--white);
 	line-height: 1.2;
 	font-weight: 700;
 	letter-spacing: 0.02em;
@@ -106,7 +106,7 @@ b {
 }
 
 a {
-	color: var(--black);
+	color: var(--white);
 	text-decoration: underline;
 	text-decoration-thickness: 1px;
 	text-underline-offset: 2px;
@@ -129,14 +129,14 @@ li {
 blockquote {
 	margin: 2rem 0;
 	padding-left: 1.5rem;
-	border-left: 3px solid var(--black);
+	border-left: 3px solid var(--white);
 	font-size: 1.25rem;
 	font-style: italic;
 }
 
 hr {
 	border: none;
-	border-top: 1px solid var(--black);
+	border-top: 1px solid var(--white);
 	margin: 3rem 0;
 }
 
@@ -166,7 +166,7 @@ pre code {
 	background: none;
 	padding: 0;
 	border: none;
-	color: var(--black);
+	color: var(--white);
 }
 
 img {

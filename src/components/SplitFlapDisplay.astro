@@ -24,7 +24,7 @@
 		width: 1.5rem;
 		height: 2rem;
 		border: 2px solid var(--accent);
-		background: var(--white);
+		background: var(--black);
 		display: flex;
 		align-items: center;
 		justify-content: center;
@@ -41,7 +41,7 @@
 		font-family: var(--font-mono);
 		font-size: 1rem;
 		font-weight: 700;
-		color: var(--black);
+		color: var(--white);
 		line-height: 1;
 	}
 
@@ -82,14 +82,20 @@
 
 <script>
 	const HEX_CHARS = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'];
+	const FLIP_CHARS = [...HEX_CHARS, '!', '@', '#', '$', '%', '^', '&', '*'];
+
 	let isAnimating = false;
 
-	function getRandomHexChar(): string {
+	function getRandomValidHexChar(): string {
 		return HEX_CHARS[Math.floor(Math.random() * HEX_CHARS.length)];
 	}
 
+	function getRandomFlipperChar(): string {
+		return FLIP_CHARS[Math.floor(Math.random() * FLIP_CHARS.length)];
+	}
+
 	function generateHexCode(): string[] {
-		return Array.from({ length: 6 }, () => getRandomHexChar());
+		return Array.from({ length: 6 }, () => getRandomValidHexChar());
 	}
 
 	function updateAccentColor(hexCode: string) {
@@ -113,7 +119,7 @@
 
 					setTimeout(() => {
 						if (currentFlip < flipCount - 1) {
-							charElement.textContent = getRandomHexChar();
+							charElement.textContent = getRandomFlipperChar();
 						} else {
 							charElement.textContent = finalChar;
 						}

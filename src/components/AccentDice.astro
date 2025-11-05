@@ -6,14 +6,12 @@
 
 <style>
 	#dice-canvas-container {
-		position: fixed;
-		top: 2rem;
-		right: 2rem;
+		position: relative;
 		width: 200px;
 		height: 120px;
-		z-index: 1000;
 		cursor: pointer;
 		user-select: none;
+		flex-shrink: 0;
 	}
 
 	#dice-canvas-container canvas {
@@ -23,9 +21,6 @@
 
 	@media (max-width: 768px) {
 		#dice-canvas-container {
-			top: 4rem;
-			right: 1.25rem;
-			left: auto;
 			width: 100px;
 			height: 70px;
 		}

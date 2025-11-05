@@ -61,10 +61,14 @@
 	}
 
 	.flap.flipping .flap-char {
-		animation: flip 0.08s ease-in-out;
+		animation: flip 0.12s ease-in-out;
 	}
 
 	@media (max-width: 768px) {
+		#split-flap-container {
+			margin-bottom: 0.75rem;
+		}
+
 		.flap {
 			width: 1.25rem;
 			height: 1.75rem;
@@ -114,14 +118,14 @@
 							charElement.textContent = finalChar;
 						}
 						flapElement.classList.remove('flipping');
-					}, 40); // Half of flip animation duration
+					}, 60); // Half of flip animation duration
 
 					currentFlip++;
 					if (currentFlip >= flipCount) {
 						clearInterval(flipInterval);
 						resolve();
 					}
-				}, 80); // Match flip animation duration
+				}, 120); // Match flip animation duration
 			}, delay);
 		});
 	}

@@ -1,0 +1,181 @@
+---
+// SplitFlapDisplay.astro - Interactive split-flap display that generates hex color codes
+---
+
+<div id="split-flap-container">
+	<div class="flap" data-index="0"><span class="flap-char">0</span></div>
+	<div class="flap" data-index="1"><span class="flap-char">0</span></div>
+	<div class="flap" data-index="2"><span class="flap-char">0</span></div>
+	<div class="flap" data-index="3"><span class="flap-char">0</span></div>
+	<div class="flap" data-index="4"><span class="flap-char">0</span></div>
+	<div class="flap" data-index="5"><span class="flap-char">0</span></div>
+</div>
+
+<style>
+	#split-flap-container {
+		display: flex;
+		gap: 0.25rem;
+		cursor: pointer;
+		user-select: none;
+		position: relative;
+	}
+
+	.flap {
+		width: 2rem;
+		height: 2.5rem;
+		border: 1px solid var(--black);
+		background: var(--white);
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		position: relative;
+		overflow: hidden;
+		transition: background-color 0.2s ease;
+	}
+
+	.flap:hover {
+		background: var(--gray-light);
+	}
+
+	.flap-char {
+		font-family: var(--font-mono);
+		font-size: 1.25rem;
+		font-weight: 700;
+		color: var(--black);
+		line-height: 1;
+	}
+
+	/* Flip animation */
+	@keyframes flip {
+		0% {
+			transform: rotateX(0deg);
+		}
+		50% {
+			transform: rotateX(90deg);
+			opacity: 0;
+		}
+		100% {
+			transform: rotateX(0deg);
+			opacity: 1;
+		}
+	}
+
+	.flap.flipping .flap-char {
+		animation: flip 0.15s ease-in-out;
+	}
+
+	@media (max-width: 768px) {
+		.flap {
+			width: 1.5rem;
+			height: 2rem;
+		}
+
+		.flap-char {
+			font-size: 1rem;
+		}
+	}
+</style>
+
+<script>
+	const HEX_CHARS = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'];
+	let isAnimating = false;
+
+	function getRandomHexChar(): string {
+		return HEX_CHARS[Math.floor(Math.random() * HEX_CHARS.length)];
+	}
+
+	function generateHexCode(): string[] {
+		return Array.from({ length: 6 }, () => getRandomHexChar());
+	}
+
+	function updateAccentColor(hexCode: string) {
+		document.documentElement.style.setProperty('--accent', `#${hexCode}`);
+		localStorage.setItem('accent-color', hexCode);
+	}
+
+	function loadSavedAccentColor(): string | null {
+		return localStorage.getItem('accent-color');
+	}
+
+	async function animateFlap(flapElement: HTMLElement, finalChar: string, delay: number): Promise<void> {
+		return new Promise((resolve) => {
+			setTimeout(() => {
+				const charElement = flapElement.querySelector('.flap-char') as HTMLElement;
+				const flipCount = 4 + Math.floor(Math.random() * 3); // 4-6 flips
+				let currentFlip = 0;
+
+				const flipInterval = setInterval(() => {
+					flapElement.classList.add('flipping');
+
+					setTimeout(() => {
+						if (currentFlip < flipCount - 1) {
+							charElement.textContent = getRandomHexChar();
+						} else {
+							charElement.textContent = finalChar;
+						}
+						flapElement.classList.remove('flipping');
+					}, 75); // Half of flip animation duration
+
+					currentFlip++;
+					if (currentFlip >= flipCount) {
+						clearInterval(flipInterval);
+						resolve();
+					}
+				}, 150); // Match flip animation duration
+			}, delay);
+		});
+	}
+
+	async function animateAllFlaps() {
+		if (isAnimating) return;
+		isAnimating = true;
+
+		const newHexCode = generateHexCode();
+		const flaps = document.querySelectorAll('.flap') as NodeListOf<HTMLElement>;
+
+		// Create random delays for stagger effect (0-200ms)
+		const delays = Array.from({ length: 6 }, () => Math.random() * 200);
+
+		// Animate all flaps with their respective delays
+		const animations = Array.from(flaps).map((flap, index) =>
+			animateFlap(flap, newHexCode[index], delays[index])
+		);
+
+		await Promise.all(animations);
+
+		// Update accent color after all animations complete
+		updateAccentColor(newHexCode.join(''));
+		isAnimating = false;
+	}
+
+	function initializeSplitFlap() {
+		const container = document.getElementById('split-flap-container');
+		if (!container) return;
+
+		// Load saved color or generate new one
+		const savedColor = loadSavedAccentColor();
+		let initialChars: string[];
+
+		if (savedColor && savedColor.length === 6) {
+			initialChars = savedColor.split('');
+			updateAccentColor(savedColor);
+		} else {
+			initialChars = generateHexCode();
+			updateAccentColor(initialChars.join(''));
+		}
+
+		// Set initial characters
+		const flaps = container.querySelectorAll('.flap-char') as NodeListOf<HTMLElement>;
+		flaps.forEach((charElement, index) => {
+			charElement.textContent = initialChars[index];
+		});
+
+		// Add click handler
+		container.addEventListener('click', animateAllFlaps);
+	}
+
+	// Initialize on load
+	if (typeof window !== 'undefined') {
+		initializeSplitFlap();
+	}
+</script>

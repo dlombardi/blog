@@ -2,7 +2,7 @@
 import { getCollection } from 'astro:content';
 import BaseHead from '../components/BaseHead.astro';
 import FormattedDate from '../components/FormattedDate.astro';
-import AccentDice from '../components/AccentDice.astro';
+import SplitFlapDisplay from '../components/SplitFlapDisplay.astro';
 import { SITE_TITLE } from '../consts';
 
 const posts = (await getCollection('blog')).sort(
@@ -31,10 +31,17 @@ const posts = (await getCollection('blog')).sort(
 				border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 			}
 
+			.name-container {
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
+				margin-bottom: 0.5rem;
+				gap: 2rem;
+			}
+
 			.name {
 				font-size: 1.5rem;
 				font-weight: 700;
-				margin-bottom: 0.5rem;
 				letter-spacing: 0.05em;
 				font-family: var(--font-mono);
 				text-transform: uppercase;
@@ -140,6 +147,12 @@ const posts = (await getCollection('blog')).sort(
 					margin-bottom: 2rem;
 				}
 
+				.name-container {
+					flex-direction: column;
+					align-items: flex-start;
+					gap: 1rem;
+				}
+
 				.post-item {
 					margin-bottom: 2rem;
 					padding-bottom: 2rem;
@@ -155,8 +168,10 @@ const posts = (await getCollection('blog')).sort(
 	<body>
 		<main>
 			<header class="header">
-				<AccentDice />
-				<div class="name">Darien Lombardi</div>
+				<div class="name-container">
+					<div class="name">Darien Lombardi</div>
+					<SplitFlapDisplay />
+				</div>
 				<div class="socials">
 					<a href="https://github.com/dlombardi" target="_blank" rel="noopener noreferrer">GitHub</a>
 					<a href="https://x.com/DarienLombardi" target="_blank" rel="noopener noreferrer">Twitter</a>

@@ -46,6 +46,9 @@ const posts = (await getCollection('blog')).sort(
 				font-family: var(--font-mono);
 				text-transform: uppercase;
 				position: relative;
+				display: flex;
+				align-items: center;
+				line-height: 1;
 			}
 
 			.name::before {
@@ -53,7 +56,6 @@ const posts = (await getCollection('blog')).sort(
 				color: var(--accent);
 				margin-right: 0.5rem;
 				font-size: 0.8em;
-				vertical-align: middle;
 			}
 
 			.socials {
